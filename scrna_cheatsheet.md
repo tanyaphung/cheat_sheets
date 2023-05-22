@@ -6,39 +6,47 @@
 
 ```
 adata = sc.read_h5ad('anndata.h5ad')
+#or:
+adata = anndata.read("anndata.h5ad")
 ```
 
+- Subset the adata object for a list of cells
 ```
-col_ids = ["AAACCCACACTCCTGT_TSP6_Liver_NA_10X_1_1", "AAACGAAGTACCAGAG_TSP6_Liver_NA_10X_1_1"] test_subset = sc.get.var_df(adata, keys=col_ids)
+col_ids = ["AAACCCACACTCCTGT_TSP6_Liver_NA_10X_1_1", "AAACGAAGTACCAGAG_TSP6_Liver_NA_10X_1_1"] 
+test_subset = sc.get.var_df(adata, keys=col_ids)
 ```
 
-- Get gene names:
-
+- Get gene names if the gene names are the index of adata.var
 ```
 adata.var_names
 ```
 
 - Get cell names:
-
 ```
 print(set(adata.obs_names))
 ```
 
 - Number of cells:
-
 ```
 adata.shape[0]
 ```
 
 - Get metadata:
-
 ```
-adata_original.obs
+adata.obs
 ```
 
 - Get raw data:
 ```
-adata2 = adata.raw.to_adata()
+adata.raw.X
+```
+
+- View sparse matrix:
+```
+from scipy.sparse.csc import csc_matrix
+adata.X.A
+#or:
+adata.raw.X.A
 ```
 
 - Loading large dataset:
